@@ -1,0 +1,47 @@
+.notification
+  チャットグループが作成されました。
+
+.side
+  .side__user
+    .side__user-content
+      .side__user-name
+        saito
+
+      = link_to "", class: "side__user-link-edit" do
+        %i.fa.fa-edit
+      = link_to "", class: "side__user-link-cog" do
+        %i.fa.fa-cog
+
+
+  .side__group
+    = render partial: "chatside-group"
+
+.chat-main
+  .chat-main__header
+    .chat-main__header-group.clearfix
+      .chat-main__header-group-name
+        sampleグループ
+
+      %a.chat-main__header-group-btn
+        Edit
+
+    .chat-main__header-member
+      Members Saito
+
+
+  .chat-main__body
+    = render partial: "chatmain-messege"
+
+
+
+  .chat-main__footer
+    .chat-main__footer-form
+      %input.chat-main__footer-text{type: "text", placeholder: 'type a message'}
+      %label.chat-main__footer-label{for: "upload-icon"}
+        %input.chat-main__footer-faile{type: 'file', id: 'upload-icon'}
+        %i.fa.fa-image
+      %input.chat-main__footer-btn{type: 'submit', value: 'Send'}
+
+
+
+
