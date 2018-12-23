@@ -1,10 +1,13 @@
 .chat-main__messege
   .chat-main__messege-name
-    saito
+    = message.user.name
   .chat-main__messege-time
-    2018/12/14 12:00:00
-  .chat-main__messege-text
-    Hello
+    = format_posted_time(message.created_at)
+  - if message.content.present?
+    %p.chat-main__messege-text
+      = message.content
+  = image_tag message.image.url, class: '' if message.image.precent?
+
 
 .chat-main__messege
   .chat-main__messege-name
