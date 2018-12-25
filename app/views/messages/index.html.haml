@@ -1,4 +1,4 @@
-    = render partial: "chatside-group"
+= render partial: "chatside"
 
 .chat-main
   .chat-main__header
@@ -10,24 +10,19 @@
         Edit
 
     .chat-main__header-member
-      - @group.each do |member|
-        = member
+      = @group.users.name
+
 
 
   .chat-main__body
-    = render partial: "chatmain-messege"
-
+    = render partial: "chatmain", collection: @messages, as: :message
 
 
   .chat-main__footer
     .chat-main__footer-form
-      = form_for [@group, @message] do |f|
-       = f.text_field :content, class: 'chat-main__footer-text', placeholder: 'type a message'
-      = f.label :image, class: 'chat-main__footer-label', for: "upload-icon"
-        = f.file_fild :image, class: 'chat-main__footer-faileinput', id: 'upload-icon'
-        = fa_icon 'image'
-      = f.submit 'Send', class: 'chat-main__footer-btn'
-
-
-
-
+      = form_for [@group, @message], html:{id: 'new-message'} do |f|
+        = f.text_field :content, class: 'chat-main__footer-text', placeholder: 'type a message'
+        = f.label :image, class: 'chat-main__footer-label', for: "upload-icon" do
+          = f.file_field :image, class: 'chat-main__footer-faile', id: 'upload-icon'
+          = fa_icon 'image'
+        = f.submit 'Send', class: 'chat-main__footer-btn'
