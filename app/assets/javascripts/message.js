@@ -1,20 +1,17 @@
 $(function(){
   function buildHTML(data){
-
-    console.log(data);
-    if(data.message != ""){
-     var html = `<div class="chat-main__messege">
-                  <div class-"chat-main__messege-name">
-                   ${data.user_name}
-                  </div>
-                  <div class="chat-main__messege-time">
-                   ${data.create_time}
-                  </div>
-                  <p class="chat-main__messege-text">
-                   ${data.message}
-                  </p>
-                </div>`
-    } else  if(data.image != null){
+    if(data.message != null){
+      data_message = `<p class="chat-main__messege-text">
+                          ${data.message}
+                        </p>`
+    } else {
+      data_message = ""
+    }
+    if(data.image != null){
+      data_image = `<img src="${data.image}" class="lower-message__image">`
+    } else {
+      data_image = ""
+    }
      var html = `<div class="chat-main__messege">
                    <div class-"chat-main__messege-name">
                     ${data.user_name}
@@ -22,16 +19,15 @@ $(function(){
                    <div class="chat-main__messege-time">
                     ${data.create_time}
                    </div>
-                   <div>
-                   <img src="${data.image}">
-                   </div>
+                   ${data_message}
+                   ${data_image}
                  </div>`
-    }
     return html;
   }
   $('#new-message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
+    $('.chat-main__footer-btn').removeAttr('data-disable-with')
     var url = $(this).attr('action')
     $.ajax({
       url: url,
@@ -43,9 +39,8 @@ $(function(){
     })
     .done(function(data){
       var html = buildHTML(data);
-      console.log(html);
       $('.chat-main__body').append(html);
-      $('.chat-main__footer-text').val('');
+      $('#new-message')[0]. reset();
       $('.chat-main__body').animate({scrollTop: $('.chat-main__body')[0].scrollHeight},'fast');
 
     })

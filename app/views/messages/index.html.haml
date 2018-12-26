@@ -25,4 +25,4 @@
         = f.label :image, class: 'chat-main__footer-label', for: "upload-icon" do
           = f.file_field :image, class: 'chat-main__footer-faile', id: 'upload-icon'
           = fa_icon 'image'
-        = f.submit 'Send', class: 'chat-main__footer-btn'
+        = f.submit 'Send', "data-disable-with": "送信中...", class: 'chat-main__footer-btn'
