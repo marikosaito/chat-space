@@ -4,7 +4,7 @@
       .side__user-name
         = current_user.name
 
-      = link_to new_groups_path, class: "side__user-link-edit" do
+      = link_to new_group_path, class: "side__user-link-edit" do
         %i.fa.fa-edit
       = link_to edit_user_path(current_user), class: "side__user-link-cog" do
         %i.fa.fa-cog
