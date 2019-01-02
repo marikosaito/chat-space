@@ -1,18 +1,19 @@
 $(function(){
+
   function buildHTML(data){
     if(data.message != null){
-      data_message = `<p class="chat-main__messege-text">
+      data_message = `<p class="chat-main__messege-text ">
                           ${data.message}
                         </p>`
     } else {
       data_message = ""
     }
     if(data.image != null){
-      data_image = `<img src="${data.image}" class="lower-message__image">`
+      data_image = `<img src="${data.image}" class="lower-message__image" >`
     } else {
       data_image = ""
     }
-     var html = `<div class="chat-main__messege">
+     var html = `<div class="chat-main__message" data-id="${data.id}">
                    <div class-"chat-main__messege-name">
                     ${data.user_name}
                    </div>
@@ -24,6 +25,7 @@ $(function(){
                  </div>`
     return html;
   }
+
   $('#new-message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
@@ -48,4 +50,35 @@ $(function(){
       alert('error');
     })
   })
-})
+
+  var interval = setInterval(function(){
+    if(window.location.href.match(/\/groups\/\d+\/messages/)){
+      var message_id = $('.chat-main__message:last').data('id');
+    $.ajax({
+      url: window.location.href,
+      type: 'GET',
+      data: {
+        id:message_id
+      },
+      dataType: 'json'
+    })
+
+    .done(function(data){
+      var insertHTML ='';
+      if (data.length !== 0){
+      data.forEach(function(message){
+      insertHTML += buildHTML(message);
+      })
+      $('.chat-main__body').append(insertHTML);
+      $('.chat-main__body').animate({scrollTop: $('.chat-main__body')[0].scrollHeight},'fast');
+      }else{
+        ;
+      }
+     })
+    .fail(function(data){
+      alert('error');
+    })
+  } else {
+    clearInterval(interval);
+  }},5000);
+});
