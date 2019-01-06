@@ -54,7 +54,7 @@ $(function(){
       url: window.location.href,
       type: 'GET',
       data: {
-        id:message_id
+        id: message_id
       },
       dataType: 'json'
     })
@@ -62,8 +62,8 @@ $(function(){
     .done(function(data){
       var insertHTML ='';
       if (data.length !== 0){
-      data.forEach(function(message){
-      insertHTML += buildHTML(message);
+        data.forEach(function(message){
+        insertHTML += buildHTML(message);
       })
       $('.chat-main__body').append(insertHTML);
       $('.chat-main__body').animate({scrollTop: $('.chat-main__body')[0].scrollHeight},'fast');
