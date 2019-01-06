@@ -1,18 +1,14 @@
 $(function(){
 
   function buildHTML(data){
-    if(data.message != null){
-      data_message = `<p class="chat-main__messege-text ">
-                          ${data.message}
-                        </p>`
-    } else {
-      data_message = ""
-    }
-    if(data.image != null){
-      data_image = `<img src="${data.image}" class="lower-message__image" >`
-    } else {
-      data_image = ""
-    }
+    if(data.message != null)? :data_message = `<p class="chat-main__messege-text ">
+                                                ${data.message}
+                                              </p>`
+                               :data_message = ""
+
+    if(data.image != null)? :data_image = `<img src="${data.image}" class="lower-message__image" >`
+                            :data_image = ""
+
      var html = `<div class="chat-main__message" data-id="${data.id}">
                    <div class-"chat-main__messege-name">
                     ${data.user_name}
